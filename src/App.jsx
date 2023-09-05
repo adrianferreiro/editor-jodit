@@ -1,17 +1,18 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import JoditEditor from "jodit-react";
 
 const JoditEditorComponent = () => {
   const editor = useRef(null);
 
+  useEffect(() => {
+    setContent(localStorage.getItem("document"));
+      }, [])
+  
+
   const [content, setContent] = useState("");
 
   const guardarTexto = (newContent) => {
     localStorage.setItem("document", newContent);
-  };
-
-  const recuperarTexto = () => {
-    setContent(localStorage.getItem("document"));
   };
 
   return (
@@ -34,7 +35,6 @@ const JoditEditorComponent = () => {
           }}
         />
       </div>
-      <button onClick={()=> recuperarTexto()} >Prueba</button>
     </>
   );
 };
